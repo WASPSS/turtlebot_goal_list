@@ -32,8 +32,6 @@ def new_goal_list_callback(data):
 	#A global message is used in thought that it will be helpful later if we do
 	#some processing
 	global goal_to_publish
-	#print (data)
-	
 	#Assign time to header stamp.
 	goal_to_publish.header.stamp = rospy.get_rostime()
 	#Set Frame type as map, indcating these are coordinates with respect to map.
@@ -45,7 +43,6 @@ def new_goal_list_callback(data):
 	goal_to_publish.pose.orientation.w = 1
 	#Publish the goal to the Robot
 	pub2.publish(goal_to_publish)
-	#print 'callback_executed'
 
 #This callback is called everytime this node receives the status message of Robot
 #The Status message is published frequently from node, always has the last goal
@@ -56,7 +53,6 @@ def new_goal_list_callback(data):
 #status = 3 -> completed
 def goal_status_callback(data):
 	global goal_flag
-	#print ('Goal status: ', data.status_list[0].status, ' Flag: ', goal_flag )
 	#Turn the goal_flag True only when the goal is accepted.
 	if (data.status_list[0].status == 1):
 		goal_flag = True
@@ -83,7 +79,7 @@ def start():
 	pub2 = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=1)
 	#subscribe to list of goals from rviz interaction package
 	rospy.Subscriber("/list_of_goals", PoseArray, new_goal_list_callback)
-	 #subscribe to goal status from mobile base
+	#subscribe to goal status from mobile base
 	rospy.Subscriber("/move_base/status", GoalStatusArray, goal_status_callback)
 	#This keeps the function active till node are shurdown.
 	rospy.spin()
