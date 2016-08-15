@@ -11,11 +11,11 @@ from actionlib_msgs.msg import GoalStatusArray
 from std_msgs.msg import Int16
 import time
 #create an object of type Pose Array message, this will hold the list of points
-#that are published from Package 1
+#that are published from tb_rviz_interaction
 goal_list = PoseArray()
 
 #Initialize variable for goal index and goal flag , this is used to hold index
-#published to package 1
+#published to tb_rviz_interaction
 goal_index = 0
 goal_flag = True
 
@@ -23,9 +23,9 @@ goal_flag = True
 #message to Robot
 goal_to_publish = PoseStamped()
 
-#This callback is called everytime this node receives list of nodes from Package 1
+#This callback is called everytime this node receives list of nodes from tb_rviz_interaction
 #This publishes the first pose of the array to the Robot to navigate.
-#There is slight difference in the message we receive from Package 1
+#There is slight difference in the message we receive from tb_rviz_interaction
 #and the message we should send to Robot. This conversion from Pose Array
 #to Pose Stamped is done here.
 def new_goal_list_callback(data):
@@ -72,7 +72,7 @@ def start():
 	# Create Global Publishers
 	global pub1,pub2
 	#Initialize current node with some name
-	rospy.init_node('Turtlebot_Goal_List')
+	rospy.init_node('tb_path_publisher')
 	#Assigin publisher that publishes the index of the goal just accomplished
 	pub1 = rospy.Publisher('/goal_completed', Int16, queue_size=1)
 	#Assign Publisher that publishes the goal to the robot to move

@@ -5,11 +5,11 @@ project(turtlebot_goal_list)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib_msgs
+  rospy
   geometry_msgs
+  actionlib_msgs
   move_base_msgs
   roscpp
-  rospy
 )
 
 ## System dependencies are found with CMake's conventions
